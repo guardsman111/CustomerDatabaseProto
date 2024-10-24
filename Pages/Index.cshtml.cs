@@ -16,13 +16,8 @@ namespace CustomerDatabaseProto.Pages
             _logger = logger;
         }
 
-        public async void OnGet()
+        public void OnGet()
         {
-
-            using (var httpClient = new HttpClient())
-            {
-                using (HttpResponseMessage response = await httpClient.GetAsync("https://localhost:7225/api/Values")) ;
-            }
         }
     }
 }

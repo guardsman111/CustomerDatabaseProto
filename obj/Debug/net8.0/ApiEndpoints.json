@@ -85,7 +85,7 @@
         "IsRequired": true
       },
       {
-        "Name": "CustomerItem",
+        "Name": "updatedCustomerItem",
         "Type": "CustomerDatabaseProto.Data.CustomerItem",
         "IsRequired": true
       }
@@ -94,7 +94,7 @@
   },
   {
     "ContainingType": "CustomerDatabaseProto.Controllers.ValuesController",
-    "Method": "Delete",
+    "Method": "DeleteAsync",
     "RelativePath": "api/Values/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,

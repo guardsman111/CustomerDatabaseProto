@@ -1,0 +1,36 @@
+﻿@page
+@model CreateModel
+@{
+    ViewData["Title"] = "Create Customer";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Create new customer</h1>
+    <p>Enter details into the form below!</a></p>
+</div>
+
+<div>
+    <body>
+        <form method="post">
+            <fieldset>
+                <legend>Add Customer</legend>
+                <div>
+                    <label for="FirstName">First Name:</label>
+                    <input type="text" name="FirstName" value=""/>
+                </div>
+                <div>
+                    <label for="LastName">Surname:</label>
+                    <input type="text" name="LastName" value=""/>
+                </div>
+                <div>
+                    <label>&nbsp;</label>
+                    <input type="submit" value="Submit" class="submit" />
+                </div>
+            </fieldset>
+        </form>
+    </body>
+</div>
+
+<div class="text-center">
+    <h1 class="display-7">@Model.responseText</h1>
+</div>

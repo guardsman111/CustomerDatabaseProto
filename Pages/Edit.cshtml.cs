@@ -8,11 +8,11 @@ using System.Security.Principal;
 
 namespace CustomerDatabaseProto.Pages
 {
-    public class DisplayModel : PageModel
+    public class EditModel : PageModel
     {
-        private readonly ILogger<DisplayModel> _logger;
+        private readonly ILogger<EditModel> _logger;
 
-        public DisplayModel(ILogger<DisplayModel> logger)
+        public EditModel(ILogger<EditModel> logger)
         {
             _logger = logger;
         }
@@ -33,11 +33,11 @@ namespace CustomerDatabaseProto.Pages
             return;
         }
 
-        public async Task OnPostDeleteAsync(long id)
+        public async Task OnPostAsync(CustomerItem item)
         {
             using (var httpClient = new HttpClient())
             {
-                using (HttpResponseMessage response = await httpClient.DeleteAsync("https://localhost:7225/api/Values/" + id.ToString()))
+                using (HttpResponseMessage response = await httpClient.PutAsJsonAsync("https://localhost:7225/api/Values/" + item.Id.ToString(), item))
                 {
                 };
             }

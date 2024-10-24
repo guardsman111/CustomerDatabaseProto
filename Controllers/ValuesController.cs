@@ -16,32 +16,31 @@ namespace CustomerDatabaseProto.Controllers
         {
             _context = context;
 
-            foreach(CustomerItem item in _context.CustomerItems)
+            if (_context.CustomerItems.ToList().Count == 0)
             {
-                _context.CustomerItems.Remove(item);
+
+                CustomerItem customer1 = new CustomerItem();
+                customer1.FirstName = "Charles";
+                customer1.LastName = "Dustin";
+
+
+                CustomerItem customer2 = new CustomerItem();
+                customer2.FirstName = "William";
+                customer2.LastName = "Winters";
+
+                CustomerItem customer3 = new CustomerItem();
+                customer3.FirstName = "Cato";
+                customer3.LastName = "Sicarius";
+
+                context.CustomerItems.Add(customer1);
+                context.CustomerItems.Add(customer2);
+                context.CustomerItems.Add(customer3);
+
+                _context.SaveChanges();
             }
-
-            CustomerItem customer1 = new CustomerItem();
-            customer1.FirstName = "Charles";
-            customer1.LastName = "Dustin";
-
-
-            CustomerItem customer2 = new CustomerItem();
-            customer2.FirstName = "William";
-            customer2.LastName = "Winters";
-
-            CustomerItem customer3 = new CustomerItem();
-            customer3.FirstName = "Cato";
-            customer3.LastName = "Sicarius";
-
-            context.CustomerItems.Add(customer1);
-            context.CustomerItems.Add(customer2);
-            context.CustomerItems.Add(customer3);
-
-            _context.SaveChanges();
         }
 
-        // GET: api/CustomerItems
+        // GET: Returns all items from the database
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CustomerItem>>> Get()
         {
@@ -50,7 +49,7 @@ namespace CustomerDatabaseProto.Controllers
             return items;
         }
 
-        // GET: api/CustomerItems/5
+        // GET: Returns a specific item from the database
         [HttpGet("{id}")]
         public async Task<ActionResult<CustomerItem>> Get(long id)
         {
@@ -64,17 +63,19 @@ namespace CustomerDatabaseProto.Controllers
             return CustomerItem;
         }
 
-        // PUT: api/CustomerItems/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: Edits an item in the database
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(long id, CustomerItem CustomerItem)
+        public async Task<IActionResult> Put(long id, CustomerItem updatedCustomerItem)
         {
-            if (id != CustomerItem.Id)
+            if (id != updatedCustomerItem.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(CustomerItem).State = EntityState.Modified;
+            CustomerItem itemToUpdate = _context.CustomerItems.FirstOrDefault(x => x.Id == id);
+
+            itemToUpdate.FirstName = updatedCustomerItem.FirstName;
+            itemToUpdate.LastName = updatedCustomerItem.LastName;
 
             try
             {
@@ -86,17 +87,14 @@ namespace CustomerDatabaseProto.Controllers
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/CustomerItems
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: Adds a new item to the database
         [HttpPost]
         public async Task<ActionResult<CustomerItem>> Post(CustomerItem CustomerItem)
         {
@@ -106,9 +104,9 @@ namespace CustomerDatabaseProto.Controllers
             return CreatedAtAction("GetCustomerItem", new { id = CustomerItem.Id }, CustomerItem);
         }
 
-        // DELETE: api/CustomerItems/5
+        // DELETE: Deletes an item from the database
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(long id)
+        public async Task<IActionResult> DeleteAsync(long id)
         {
             var CustomerItem = await _context.CustomerItems.FindAsync(id);
             if (CustomerItem == null)
@@ -122,6 +120,7 @@ namespace CustomerDatabaseProto.Controllers
             return NoContent();
         }
 
+        // Check if an item exists in the database
         private bool CustomerItemExists(long id)
         {
             return _context.CustomerItems.Any(e => e.Id == id);

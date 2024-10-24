@@ -12,6 +12,8 @@
         <tr class="bg-primary">
             <th>First Name</th>
             <th>Last Name</th>
+            <th>ID number</th>
+            <th>Delete?</th>
         </tr>
     </thead>
     <tbody>
@@ -22,10 +24,14 @@
                 <tr class ="bg-light">
                     <td class="left">@item.FirstName</td>
                     <td class="left">@item.LastName</td>
+                    <td class="left">@item.Id</td>
+                    <td class="left">
+                        <form method="post">
+                            <button type="submit" asp-page-handler="delete" asp-route-id="@item.Id"/>Delete
+                        </form>
+                    </td>
                 </tr>
             }
         }
     </tbody>
 </table>
-
-<p>@Model.data[0].FirstName</p>

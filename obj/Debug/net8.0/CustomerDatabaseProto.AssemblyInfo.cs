@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CustomerDatabaseProto")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+260b47c0239808ef706c3c04694e1b7b0abfad12")]
 [assembly: System.Reflection.AssemblyProductAttribute("CustomerDatabaseProto")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CustomerDatabaseProto")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
